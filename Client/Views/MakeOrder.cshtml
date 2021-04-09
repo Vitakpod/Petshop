@@ -1,0 +1,23 @@
+﻿@using Client.Models
+
+@model IEnumerable<PetDTO>
+
+<form method="post">
+    <label>Имя покупателя:</label><br />
+    <input type="text" name="CustomerName" /><br /><br />
+    <label>Телефон покупателя:</label><br />
+    <input type="text" name="phoneNumber" /><br /><br />
+    <p>
+        <label>Выберите животное:</label>
+        <select name="Id">
+            @foreach (PetDTO pet in Model)
+            {
+                <option value=@pet.Id>@pet.Name @pet.Type @pet.Price </option>
+            }
+        </select>
+    </p>
+
+    <p>
+        <input type="submit" value="Отправить" />
+    </p>
+</form>

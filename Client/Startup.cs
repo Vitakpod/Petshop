@@ -1,17 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Petshop.BLL.Interfaces;
-using Petshop.BLL.Services;
-using Petshop.DAL.Context;
-using Petshop.DAL.Interfaces;
-using Petshop.DAL.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+using Client.Services;
 
-namespace WebAPI
+namespace Client
 {
     public class Startup
     {
@@ -19,16 +14,11 @@ namespace WebAPI
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<PetContext>(options => options.UseSqlServer(connection));
-            services.AddControllers();
-            services.AddScoped<IUnitOfWork, ShopUnitOfWork>();
-            services.AddScoped<IShopService, ShopService>();
+            services.AddControllersWithViews();
+            services.AddHttpClient<IShopService, ShopService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -37,8 +27,13 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -46,9 +41,10 @@ namespace WebAPI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=CreatePet}/{id?}");
             });
-
         }
     }
 }

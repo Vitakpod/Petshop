@@ -1,8 +1,9 @@
-﻿using Petshop.Domain.Models;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-
-namespace Petshop.BLL.DTO
+namespace Client.Models
 {
     public class PetDTO
     {
@@ -12,5 +13,4 @@ namespace Petshop.BLL.DTO
         public decimal Price { get; set; }
         public virtual ICollection<OrderDTO> Orders { get; set; }
     }
-
 }

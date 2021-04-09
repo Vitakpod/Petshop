@@ -31,8 +31,13 @@ namespace Petshop.BLL.Services
                 Date = DateTime.Now,
                 CustomerName = orderDto.CustomerName,
                 PetId = pet.Id,
-                PhoneNumber = orderDto.PhoneNumber
+                PhoneNumber = orderDto.PhoneNumber,
+                Id = orderIdCounter,
+                Sum = orderDto.Sum
             };
+            pet.Orders = (ICollection<Order>)order;
+            orderIdCounter++;
+            Database.Pets.Update(pet);
             Database.Orders.Create(order);
             Database.Save();
         }
@@ -88,7 +93,7 @@ namespace Petshop.BLL.Services
                 throw new InvalidOperationException("Извините, Ваш заказ не найден!");
 
             return new OrderDTO { Id = order.Id, Sum = order.Sum, PhoneNumber = order.PhoneNumber, 
-                CustomerName = order.CustomerName, PetId = order.PetId, Pet = order.Pet, Date = order.Date };
+                CustomerName = order.CustomerName, PetId = order.PetId, Date = order.Date };
         }
         public void Dispose()
         {

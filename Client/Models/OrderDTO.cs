@@ -1,10 +1,7 @@
-﻿using Petshop.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 
-namespace Petshop.BLL.DTO
+
+namespace Client.Models
 {
     public class OrderDTO
     {
@@ -15,5 +12,4 @@ namespace Petshop.BLL.DTO
         public int PetId { get; set; }
         public DateTime? Date { get; set; }
     }
-
 }

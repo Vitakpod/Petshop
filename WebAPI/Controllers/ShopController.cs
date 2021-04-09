@@ -2,29 +2,30 @@
 using System.Collections.Generic;
 using Petshop.BLL.Interfaces;
 using Petshop.BLL.DTO;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class LibController : ControllerBase
+    public class ShopController : ControllerBase
     {
         IShopService service;
 
-        public LibController(IShopService service)
+        public ShopController(IShopService service)
         {
             this.service = service;
         }
 
         [HttpPut]
-        [Route("/ShopController/CreatePet")]
-        public void CreateBook(PetDTO petDTO)
+        [Route("/Shop/CreatePet")]
+        public void CreatePet(PetDTO petDTO)
         {
             service.CreatePet(petDTO);
         }
 
         [HttpGet]
-        [Route("/ShopController/GetPets")]
+        [Route("/Shop/GetPets")]
         public IEnumerable<PetDTO> GetPets()
         {
             IEnumerable<PetDTO> pets = service.GetPets();
@@ -32,7 +33,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("/ShopController/GetOrders")]
+        [Route("/Shop/GetOrders")]
         public OrderDTO GetOrder(int? orderId)
         {
             OrderDTO order = service.GetOrders(orderId);
@@ -40,7 +41,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("/ShopController/GetPet")]
+        [Route("/Shop/GetPet")]
         public PetDTO GetPet(int? id)
         {
             PetDTO pet = service.GetPet(id);
@@ -48,7 +49,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("/ShopController/GetFreePets")]
+        [Route("/Shop/GetFreePets")]
         public IEnumerable<PetDTO> GetFreePets()
         {
             IEnumerable<PetDTO> pets = service.GetFreePets();
@@ -56,7 +57,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        [Route("/ShopController/MakeOrder")]
+        [Route("/Shop/MakeOrder")]
         public void MakeOrder(OrderDTO orderDTO)
         {
             service.MakeOrder(orderDTO);

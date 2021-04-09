@@ -1,0 +1,22 @@
+﻿@using Client.Models
+
+@model IEnumerable<PetDTO>
+
+<h3>Список имеющихся в продаже животных</h3>
+@foreach (PetDTO pet in Model)
+{
+    <div>
+        <li>ID - @pet.Id</li>
+        <li>Имя - @pet.Name</li>
+        <li>Вид животного - @pet.Type</li>
+        @if (pet.Orders == null)
+        {
+            <li>Животное можно купить</li>
+        }
+        else
+        {
+            <li>Животное уже куплено :(</li>
+        }
+        <br />
+    </div>
+}

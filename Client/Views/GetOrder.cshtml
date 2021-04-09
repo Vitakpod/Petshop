@@ -1,0 +1,14 @@
+﻿
+@using Client.Models
+
+@model OrderDTO
+
+<h3>Информация о заказе</h3>
+<div>
+    № заказа - @Model.Id<br />
+    Имя покупателя - @Model.CustomerName<br />
+    Телефон покупателя - @Model.PhoneNumber<br />
+    Сумма заказа - @Model.Sum<br />
+    Дата заказа - @Model.Date<br />
+    ID животного - @Model.PetId
+</div>
