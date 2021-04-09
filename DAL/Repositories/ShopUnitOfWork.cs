@@ -3,7 +3,6 @@ using Petshop.DAL.Interfaces;
 using Petshop.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
-
 namespace Petshop.DAL.Repositories
 {
     public class ShopUnitOfWork : IUnitOfWork
