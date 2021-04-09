@@ -49,7 +49,7 @@ namespace Petshop.BLL.Services
                 throw new ArgumentNullException(nameof(id));
             var pet = Database.Pets.Get(id.Value);
             if (pet == null)
-                throw new InvalidOperationException("Животное не найдено!");
+                throw new InvalidOperationException("Извините, животное не найдено!");
 
             return new PetDTO { Type = pet.Type, Id = pet.Id, Name = pet.Name, Price = pet.Price };
         }
@@ -85,7 +85,7 @@ namespace Petshop.BLL.Services
 
             var order = Database.Orders.Get(OrderId.Value);
             if (order == null)
-                throw new InvalidOperationException("Заказ не найден!");
+                throw new InvalidOperationException("Извините, Ваш заказ не найден!");
 
             return new OrderDTO { Id = order.Id, Sum = order.Sum, PhoneNumber = order.PhoneNumber, 
                 CustomerName = order.CustomerName, PetId = order.PetId, Pet = order.Pet, Date = order.Date };
