@@ -23,13 +23,13 @@ namespace Client.Services
         {
             var jsonString = JsonSerializer.Serialize(petDTO);
             var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            using var response = await httpClient.PutAsync("https://localhost:44336/Shop/CreatePet", httpContent);
+            using var response = await httpClient.PutAsync("https://localhost:44336/api/CreatePet", httpContent);
             response.EnsureSuccessStatusCode();
         }
 
         public async Task<IEnumerable<PetDTO>> GetPets()
         {
-            using var response = await httpClient.GetAsync("https://localhost:44336/Shop/GetPets");
+            using var response = await httpClient.GetAsync("https://localhost:44336/api/GetPets");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -39,7 +39,7 @@ namespace Client.Services
 
         public async Task<IEnumerable<PetDTO>> GetFreePets()
         {
-            using var response = await httpClient.GetAsync("https://localhost:44336/Shop/GetFreePets");
+            using var response = await httpClient.GetAsync("https://localhost:44336/api/GetFreePets");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -49,7 +49,7 @@ namespace Client.Services
 
         public async Task<PetDTO> GetPet(int? id)
         {
-            using var response = await httpClient.GetAsync("https://localhost:44336/Shop/GetPet/?id=" + id.ToString());
+            using var response = await httpClient.GetAsync("https://localhost:44336/api/GetPet/?id=" + id.ToString());
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -59,7 +59,7 @@ namespace Client.Services
 
         public async Task<OrderDTO> GetOrders(int? orderId)
         {
-            using var response = await httpClient.GetAsync("https://localhost:44336/Shop/GetOrders/?orderId=" + orderId.ToString());
+            using var response = await httpClient.GetAsync("https://localhost:44336/api/GetOrders/?orderId=" + orderId.ToString());
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -71,7 +71,7 @@ namespace Client.Services
         {
             var jsonString = JsonSerializer.Serialize(orderDTO);
             var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            using var response = await httpClient.PutAsync("https://localhost:44336/Shop/MakeOrder", httpContent);
+            using var response = await httpClient.PutAsync("https://localhost:44336/api/MakeOrder", httpContent);
             response.EnsureSuccessStatusCode();
         }
     }
